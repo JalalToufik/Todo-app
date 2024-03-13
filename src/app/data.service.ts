@@ -2,23 +2,30 @@ import { Injectable, signal } from '@angular/core';
 
 import { TodoItem } from './todo-item';
 
+/**
+ * @deprecated
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
 
-    private counter = 1;  // Private variabele voor het genereren van unieke ID's
-    items2 = signal([] as TodoItem[]);  // Observable array van TodoItem objecten
+  private counter = 1;  // Private variabele voor het genereren van unieke ID's
+  items2 = signal([] as TodoItem[]);  // Observable array van TodoItem objecten
 
-    pageId = signal(0);
+  pageId = signal(0);
 
-    addItem(item: TodoItem) {   // Voegt een nieuw TodoItem toe aan de lijst
-        this.items2.update(items => {   // Update de items2 signal met de nieuwe items
-            const id = item.id ? item.id : this.counter++;  // Gebruik de item ID of genereer een nieuwe
-            const newItems = items.concat({ id, ...item });  // Creëer een nieuwe array met het nieuwe item
-            return newItems; // Retourneer de nieuwe items array om de signal te updaten
-        });
-    }
+  /**
+   * @description asdasdasd
+   * @param item
+   */
+  addItem(item: TodoItem) {   // Voegt een n    // Reset het formulier.ieuw TodoItem toe aan de lijst
+    this.items2.update(items => {   // Update de items2 signal met de nieuwe items
+      const id = item.id ? item.id : this.counter++;  // Gebruik de item ID of genereer een nieuwe
+      const newItems = items.concat({ id, ...item });  // Creëer een nieuwe array met het nieuwe item
+      return newItems; // Retourneer de nieuwe items array om de signal te updaten
+    });
+  }
 
     updateItem(id: number, newItem: Partial<TodoItem>) {
         const findNewItems = () => {
